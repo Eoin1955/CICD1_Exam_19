@@ -1,5 +1,6 @@
 package ie.atu.cicd1_exam_19.Service;
 
+import ie.atu.cicd1_exam_19.Controller.ErrorHandling.DuplicateRegNumberException;
 import ie.atu.cicd1_exam_19.Model.Driver;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,7 @@ public class driverService {
 
     public Driver create(Driver driver){
         if(findByregNumber(driver.getRegNumber()).isPresent()){
-            //throw new DuplicateException("Driver already exists!");
-            return findByregNumber(driver.getRegNumber()).get();
+            throw new DuplicateRegNumberException("Driver already exists!");
         }
         store.add(driver);
         return driver;
