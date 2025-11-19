@@ -11,10 +11,6 @@ import java.util.Optional;
 public class driverService {
     private final List<Driver> store = new ArrayList<>();
 
-    public List<Driver> findAll(){
-        return new ArrayList<>(store);
-    }
-
     public Optional<Driver> findByregNumber(String regNumber){
         for(Driver d: store){
             if(d.getRegNumber().equals(regNumber)){
@@ -26,7 +22,8 @@ public class driverService {
 
     public Driver create(Driver driver){
         if(findByregNumber(driver.getRegNumber()).isPresent()){
-            throw new DuplicateException("Driver already exists!");
+            //throw new DuplicateException("Driver already exists!");
+            return findByregNumber(driver.getRegNumber()).get();
         }
         store.add(driver);
         return driver;
