@@ -44,6 +44,16 @@ public class driverService {
             return Optional.empty();
         }
     }
+
+    public Optional <Driver> deleteByregNumber(String regNumber){
+        for(Driver d: store){
+            if(d.getRegNumber().equals(regNumber)){
+                store.remove(d);
+                return Optional.of(d);
+            }
+        }
+        return Optional.empty();
+    }
 }
 
 
