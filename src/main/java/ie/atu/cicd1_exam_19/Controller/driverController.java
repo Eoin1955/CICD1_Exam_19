@@ -33,7 +33,7 @@ public class driverController {
         return ResponseEntity.created(URI.create("/bookings"+ created.getRegNumber())).body(created);
     }
 
-    @PutMapping("/{regNumber")
+    @PutMapping("/{regNumber}")
     public ResponseEntity<Driver> update(@Valid @RequestBody Driver driver){
         Optional<Driver> updated = driverService.update(driver);
         if(updated.isPresent()){
