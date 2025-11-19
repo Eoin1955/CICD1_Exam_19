@@ -3,7 +3,6 @@ package ie.atu.cicd1_exam_19.Service;
 import ie.atu.cicd1_exam_19.Model.Driver;
 import org.springframework.stereotype.Service;
 
-import javax.lang.model.element.NestingKind;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,4 +23,28 @@ public class driverService {
         }
         return Optional.empty();
     }
+
+    public Driver create(Driver driver){
+        if(findByregNumber(driver.getRegNumber()).isPresent()){
+            throw new DuplicateException("Driver already exists!");
+        }
+        store.add(driver);
+        return driver;
+    }
+
+    public Optional<Driver> update(Driver driver){
+        Optional<Driver> found = findByregNumber(driver.getRegNumber());
+        if(found.isPresent()){
+            Driver update = found.get();
+            update.setDriverName(driver.getDriverName());
+            update.setPassengers(driver.getPassengers());
+            update.setEmail(driver.getEmail());
+            return Optional.of(update);}
+        else{
+            return Optional.empty();
+        }
+    }
 }
+
+
+
